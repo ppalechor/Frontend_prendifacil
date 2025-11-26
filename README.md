@@ -1,16 +1,50 @@
-# React + Vite
+# Frontend Prendifacil
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación React + Vite para la prendería. Incluye módulos de usuarios, préstamos, intereses, empeños y reportes, con autenticación JWT y control por roles.
 
-Currently, two official plugins are available:
+## Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 18+
+- Backend corriendo en `http://localhost:3000` (ver repo backend)
 
-## React Compiler
+## Instalación
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Abrir en `http://localhost:5173/`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Configuración de entorno
+
+- Crear `.env` (o usar `.envlocal`) con:
+
+```
+VITE_API_BASE_URL=http://localhost:3000/api
+```
+
+Si no se define, se usa el valor por defecto `http://localhost:3000/api`.
+
+## Autenticación
+
+- Login pide identificación numérica y contraseña.
+- Recomendado: contraseña mínima de 8 caracteres.
+- El interceptor cierra sesión solo en `401`. Los `403` no fuerzan logout.
+
+## Roles y navegación
+
+- `ADMIN`: ve todos los módulos.
+- `CLIENTE`: ve “Mi Perfil”, “Préstamos (míos)”, “Intereses”.
+
+## Comandos útiles
+
+- `npm run dev`: desarrollo con Vite.
+- `npm run build`: build de producción.
+- `npm run preview`: previsualizar el build.
+- `npm run lint`: revisar estilo/código.
+
+## Notas
+
+- Las llamadas al API usan `apiBaseUrl` y cabecera `Authorization` con el token JWT.
+- Si ves warnings de `react-hooks/exhaustive-deps`, se pueden reducir envolviendo funciones en `useCallback`.
